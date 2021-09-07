@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        'use strict'
+
+        //Задание 1.2 в стиле es5
+
+        function Post(author, text, date) {
+            this.author = author;
+            this.text = text;
+            this.date = date;
+        }
+
+        Post.prototype.edit = function (text) {
+            return this.text = text
+        };
+
+
+        function AttachedPost(author, text, date, highlighted) {
+            Post.call(this, author, text, date);
+            this.highlighted = false;
+        }
+
+        AttachedPost.prototype = Object.create(Post.prototype);
+        AttachedPost.prototype.constructor = AttachedPost;
+
+        AttachedPost.prototype.makeTextHighlighted = function () {
+            this.highlighted = true;
+        }
+
+        let obj1 = new AttachedPost('Jane', 'Hello everybody', 'September 01');
+        obj1.edit('Today is a good day');
+        obj1.makeTextHighlighted();
+
+        //задание 1.2 в стиле es6
+
+        /*class Post {
+            constructor(author, text, date) {
+                this.author = author;
+                this.text = text;
+                this.date = date;
+            }
+
+            edit(text) {
+                return this.text = text;
+            }
+
+        }
+
+        class AttachedPost extends Post {
+            constructor(author, text, date, highlighted) {
+                super(author, text, date),
+                    this.highlighted = false
+            }
+
+            makeTextHighlighted() {
+                this.highlighted = true;
+            }
+        }
+
+        let obj2 = new AttachedPost('Leo', 'Today is a good day', 'August 15');
+        obj2.edit('Yesterday all my troubles seemed so far away');
+        obj2.makeTextHighlighted();  */
+
+
+    </script>
+
+</body>
+
+</html>
